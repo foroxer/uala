@@ -1,0 +1,50 @@
+version: "3.7"
+services:
+  api_service:
+    build: .
+    restart: always
+    ports:
+      - '8080:8080'
+    networks:
+      - ualanet
+    environment:
+      - spring.datasource.url=jdbc:mysql://mysqldb:3306/test?allowPublicKeyRetrieval=true
+      - spring.data.redis.url=redis://redis:6379
+
+    depends_on:
+      - mysqldb
+      - redis
+    
+    volumes:
+      - .m2:/root/.m2
+      
+  mysqldb:
+    image: "mysql:8.3"
+    restart: always
+    ports:
+      - "3306:3306"
+    networks:
+      - ualanet
+    environment:
+      MYSQL_DATABASE: test
+      MYSQL_USER: mysqltestuser
+      MYSQL_PASSWORD: mysqltestpass
+      MYSQL_ROOT_PASSWORD: rootpass
+    volumes:
+      - ./db:/var/lib/mysql
+
+  redis:
+    image: redis:7.2.4-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 60 1000 --loglevel warning
+    volumes:
+      - ./cache:/data
+    networks:
+      - ualanet
+
+networks:
+  ualanet:
+    driver: bridge
+
