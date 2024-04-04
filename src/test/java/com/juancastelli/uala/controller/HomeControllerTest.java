@@ -29,8 +29,8 @@ class HomeControllerTest {
     UserService userService;
     @Autowired
     TweetService tweetService;
-
-    EmbededRedis embededRedis = new EmbededRedis();
+    @Autowired
+    EmbededRedis embededRedis;
 
     @BeforeEach
     void setUp() throws IOException {

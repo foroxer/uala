@@ -1,26 +1,24 @@
 package com.juancastelli.uala.testUtil;
 
-import jakarta.annotation.PostConstruct;
-import jakarta.annotation.PreDestroy;
-import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import redis.embedded.RedisServer;
 
 import java.io.IOException;
 
 @Component
-@TestConfiguration
 public class EmbededRedis {
 
+    @Value("${spring.data.redis.port}")
+    Integer port;
     private RedisServer redisServer;
 
-    @PostConstruct
     public void startRedis() throws IOException {
-        redisServer = new RedisServer(6370);
+
+        redisServer = new RedisServer(port);
         redisServer.start();
     }
 
-    @PreDestroy
     public void stopRedis() throws IOException {
         redisServer.stop();
     }
