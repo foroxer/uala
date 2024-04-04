@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     @Autowired
     private UserService userService;
+
     @PostMapping("/follow/{followId}")
     public void createTweet(@RequestHeader Integer userID, @PathVariable Integer followId) throws Exception {
-        userService.follow(userID,followId);
+        userService.follow(userID, followId);
     }
 }

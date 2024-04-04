@@ -11,36 +11,41 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-	@Autowired
-	public UserService(UserRepository userRepository) {
-		this.userRepository = userRepository;
-	}
+    private final UserRepository userRepository;
 
-	private final UserRepository userRepository;
-	public List<User> findAll(){
-		return userRepository.findAll();
-	}
+    @Autowired
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
-	public Optional<User> get(Integer id){
-		return userRepository.findById(id);
-	}
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
 
-	public User save(User user){
-		return userRepository.save(user);
-	}
+    public Optional<User> get(Integer id) {
+        return userRepository.findById(id);
+    }
 
-	public void follow(User user, User follow) throws Exception {
-		follow(user.getId(),follow.getId());
-	}
-	public void follow(Integer userId, Integer followId) throws Exception {
-		Optional<User> optFollowUser = userRepository.findById(followId);
+    public User save(User user) {
+        return userRepository.save(user);
+    }
 
-		if(optFollowUser.isEmpty()) throw new Exception("user to follow not found");
+    public void follow(User user, User follow) throws Exception {
+        follow(user.getId(), follow.getId());
+    }
 
-		userRepository.findById(userId).ifPresent(
-			 user -> {
-				 user.getFollowers().add(optFollowUser.get());
-				 save(user);
-		 });
-	}
+    public void follow(Integer userId, Integer followId) throws Exception {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        Optional<User> optionalToFollowUser = userRepository.findById(followId);
+
+
+        optionalUser.orElseThrow(() -> new Exception("user to follow not found"));
+        optionalToFollowUser.orElseThrow(() -> new Exception("user to follow not found"));
+
+        optionalToFollowUser.ifPresent(
+                user -> {
+                    user.getFollowers().add(optionalUser.get());
+                    save(user);
+                });
+    }
 }

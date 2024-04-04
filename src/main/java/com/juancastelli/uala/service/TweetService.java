@@ -8,19 +8,17 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-
 @Service
 public class TweetService {
-
 
     @Autowired
     private TweetRepository tweetRepository;
 
-    public List<Tweet> findAll(){
-        return tweetRepository.findAll();
+    public Tweet save(Tweet t) {
+        return tweetRepository.save(t);
     }
 
-    public Tweet save(Tweet t) {return tweetRepository.save(t);}
-
-    public Optional<Tweet> get (Tweet t ){ return tweetRepository.findById(t.getId());}
+    public Optional<Tweet> get(Tweet t) {
+        return tweetRepository.findById(t.getId());
+    }
 }

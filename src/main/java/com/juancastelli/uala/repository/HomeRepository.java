@@ -16,7 +16,7 @@ import org.springframework.data.redis.serializer.GenericToStringSerializer;
 public class HomeRepository {
 
     @Bean
-    public RedisTemplate<Integer, Tweet> redisTemplate(RedisConnectionFactory connectionFactory) {
+    public RedisTemplate<Integer, Tweet> redisConfig(RedisConnectionFactory connectionFactory) {
         RedisTemplate<Integer, Tweet> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(connectionFactory);
         redisTemplate.setKeySerializer(new GenericToStringSerializer<>(Integer.TYPE));

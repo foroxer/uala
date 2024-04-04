@@ -12,15 +12,32 @@ public class Tweet {
     private Integer id;
     @Column(length = 280)
     private String message;
-    @Column(columnDefinition="DATETIME")
+    @Column(columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
     @ManyToOne
 //    @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 //    @JsonIdentityReference(alwaysAsId=true)
-    @JsonIgnoreProperties({"tweets","followers"})
+    @JsonIgnoreProperties({"tweets", "followers"})
     private User owner;
+
+    public Tweet() {
+    }
+
+    public Tweet(User owner, String message) {
+        this.owner = owner;
+        this.message = message;
+        this.date = new Date();
+    }
+
+    public Tweet(Integer id, String message, Date date, User owner) {
+        this.id = id;
+        this.message = message;
+        this.date = date;
+        this.owner = owner;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -50,22 +67,6 @@ public class Tweet {
     }
 
     public void setOwner(User owner) {
-        this.owner = owner;
-    }
-
-    public Tweet() {
-    }
-
-    public Tweet(User owner, String message) {
-        this.owner = owner;
-        this.message = message;
-        this.date = new Date();
-    }
-
-    public Tweet(Integer id, String message, Date date, User owner) {
-        this.id = id;
-        this.message = message;
-        this.date = date;
         this.owner = owner;
     }
 }
