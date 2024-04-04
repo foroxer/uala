@@ -16,7 +16,7 @@ public class HomeService {
 
     public void updateFollowersHome(User user, Tweet tweet){
         user.getFollowers().forEach(follower -> {
-            updateUserHome(user,tweet);
+            updateUserHome(follower,tweet);
         });
     }
     public void updateUserHome(User user, Tweet tweet) {

@@ -1,0 +1,1 @@
+- Los tweets permaneceran en el Timeline de cada usuario sin importar que suceda con sus followers (en caso que a futuro se puedan eliminar followers)
