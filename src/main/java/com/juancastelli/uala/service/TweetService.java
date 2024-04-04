@@ -13,12 +13,22 @@ public class TweetService {
 
     @Autowired
     private TweetRepository tweetRepository;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private HomeService homeService;
 
-    public Tweet save(Tweet t) {
-        return tweetRepository.save(t);
+    public void createTweet(String message, Integer userId) {
+        userService.get(userId).ifPresent(user -> {
+            Tweet tweet = tweetRepository.save(new Tweet(user, message));
+            user.getTweets().add(tweet);
+            userService.save(user);
+
+            homeService.updateFollowersHome(user,tweet);
+        });
     }
 
-    public Optional<Tweet> get(Tweet t) {
-        return tweetRepository.findById(t.getId());
+    public Optional<Tweet> get(Integer id) {
+        return tweetRepository.findById(id);
     }
 }

@@ -11,12 +11,9 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    private final UserRepository userRepository;
-
     @Autowired
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private UserRepository userRepository;
+
 
     public List<User> findAll() {
         return userRepository.findAll();
@@ -38,8 +35,7 @@ public class UserService {
         Optional<User> optionalUser = userRepository.findById(userId);
         Optional<User> optionalToFollowUser = userRepository.findById(followId);
 
-
-        optionalUser.orElseThrow(() -> new Exception("user to follow not found"));
+        optionalUser.orElseThrow(() -> new Exception("user not found"));
         optionalToFollowUser.orElseThrow(() -> new Exception("user to follow not found"));
 
         optionalToFollowUser.ifPresent(

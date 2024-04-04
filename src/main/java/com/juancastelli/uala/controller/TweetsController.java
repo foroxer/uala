@@ -1,15 +1,15 @@
 package com.juancastelli.uala.controller;
 
 import com.juancastelli.uala.model.Tweet;
+import com.juancastelli.uala.model.User;
 import com.juancastelli.uala.service.HomeService;
 import com.juancastelli.uala.service.TweetService;
 import com.juancastelli.uala.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 public class TweetsController {
@@ -18,21 +18,15 @@ public class TweetsController {
     private UserService userService;
     @Autowired
     private TweetService tweetService;
-
     @Autowired
     private HomeService homeService;
 
-
     @PostMapping("/tweet")
     public void createTweet(@RequestHeader Integer userID, @RequestParam String message) {
-        userService.get(userID).ifPresent(user -> {
-            Tweet tweet = tweetService.save(new Tweet(user, message));
-            user.getTweets().add(tweet);
-            userService.save(user);
-
-            user.getFollowers().forEach(follower -> {
-				homeService.updateUserHome(user,tweet);
-            });
-        });
+        tweetService.createTweet(message,userID);
+    }
+    @GetMapping("/tweet/{id}")
+    public Optional<Tweet> get(@PathVariable Integer id){
+        return tweetService.get(id);
     }
 }

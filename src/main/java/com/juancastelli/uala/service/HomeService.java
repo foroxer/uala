@@ -15,6 +15,11 @@ public class HomeService {
     @Autowired
     private HomeRepository homeRepository;
 
+    public void updateFollowersHome(User user, Tweet tweet){
+        user.getFollowers().forEach(follower -> {
+            updateUserHome(user,tweet);
+        });
+    }
     public void updateUserHome(User user, Tweet tweet) {
         homeRepository.updateHome( user,  tweet);
     }
@@ -22,4 +27,6 @@ public class HomeService {
     public List<Tweet> getHome(Integer userId, Integer start, Integer offset) {
         return homeRepository.getHome( userId,  start,  offset);
     }
+
+
 }
