@@ -10,15 +10,21 @@ import java.util.Optional;
 @RestController
 public class TweetsController {
 
+    private final TweetService tweetService;
+
     @Autowired
-    private TweetService tweetService;
+
+    public TweetsController(TweetService tweetService) {
+        this.tweetService = tweetService;
+    }
 
     @PostMapping("/tweet")
-    public void createTweet(@RequestHeader Integer userID, @RequestParam String message) {
-        tweetService.createTweet(message,userID);
+    public Tweet createTweet(@RequestHeader Integer userID, @RequestParam String message) throws Exception {
+        return tweetService.createTweet(message, userID);
     }
+
     @GetMapping("/tweet/{id}")
-    public Optional<Tweet> get(@PathVariable Integer id){
+    public Optional<Tweet> get(@PathVariable Integer id) {
         return tweetService.get(id);
     }
 }

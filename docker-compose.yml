@@ -17,7 +17,7 @@ services:
     
     volumes:
       - .m2:/root/.m2
-      
+
   mysqldb:
     image: "mysql:8.3"
     restart: always

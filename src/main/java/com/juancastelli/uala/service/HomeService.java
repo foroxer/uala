@@ -11,19 +11,24 @@ import java.util.List;
 @Service
 public class HomeService {
 
-    @Autowired
-    private HomeRepository homeRepository;
+    private final HomeRepository homeRepository;
 
-    public void updateFollowersHome(User user, Tweet tweet){
+    @Autowired
+    public HomeService(HomeRepository homeRepository) {
+        this.homeRepository = homeRepository;
+    }
+
+    public void updateFollowersHome(User user, Tweet tweet) {
         user.getFollowers().forEach(follower -> {
-            updateUserHome(follower,tweet);
+            updateUserHome(follower, tweet);
         });
     }
+
     public void updateUserHome(User user, Tweet tweet) {
-        homeRepository.updateHome( user,  tweet);
+        homeRepository.updateHome(user, tweet);
     }
 
     public List<Tweet> getHome(Integer userId, Integer start, Integer offset) {
-        return homeRepository.getHome( userId,  start,  offset);
+        return homeRepository.getHome(userId, start, offset);
     }
 }

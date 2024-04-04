@@ -9,8 +9,13 @@ import java.util.Optional;
 
 @RestController
 public class UserController {
+    private final UserService userService;
+
     @Autowired
-    private UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @PostMapping("user/follow/{followId}")
     public void createTweet(@RequestHeader Integer userID, @PathVariable Integer followId) throws Exception {
@@ -18,11 +23,12 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    public Optional<User> get(@PathVariable Integer id){
+    public Optional<User> get(@PathVariable Integer id) {
         return userService.get(id);
     }
+
     @PostMapping("/user")
-    public User get(@RequestParam String name){
+    public User get(@RequestParam String name) {
         return userService.save(new User(name));
     }
 }

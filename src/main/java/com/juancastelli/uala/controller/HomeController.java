@@ -13,8 +13,13 @@ import java.util.List;
 @RestController
 public class HomeController {
 
-    @Autowired
     HomeService homeService;
+
+    @Autowired
+
+    public HomeController(HomeService homeService) {
+        this.homeService = homeService;
+    }
 
     @GetMapping("/home")
     public List<Tweet> addTweet(@RequestHeader Integer userID, @RequestParam(defaultValue = "0") Integer start, @RequestParam(defaultValue = "10") Integer offset) {
