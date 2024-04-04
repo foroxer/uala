@@ -12,13 +12,12 @@ public class UserController {
     private final UserService userService;
 
     @Autowired
-
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
     @PostMapping("user/follow/{followId}")
-    public void createTweet(@RequestHeader Integer userID, @PathVariable Integer followId) throws Exception {
+    public void follow(@RequestHeader Integer userID, @PathVariable Integer followId) throws Exception {
         userService.follow(userID, followId);
     }
 
@@ -28,7 +27,7 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    public User get(@RequestParam String name) {
+    public User create(@RequestParam String name) {
         return userService.save(new User(name));
     }
 }
