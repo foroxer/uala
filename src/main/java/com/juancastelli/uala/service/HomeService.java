@@ -4,7 +4,6 @@ import com.juancastelli.uala.model.Tweet;
 import com.juancastelli.uala.model.User;
 import com.juancastelli.uala.repository.HomeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,6 +26,4 @@ public class HomeService {
     public List<Tweet> getHome(Integer userId, Integer start, Integer offset) {
         return homeRepository.getHome( userId,  start,  offset);
     }
-
-
 }

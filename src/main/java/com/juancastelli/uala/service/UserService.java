@@ -27,9 +27,6 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public void follow(User user, User follow) throws Exception {
-        follow(user.getId(), follow.getId());
-    }
 
     public void follow(Integer userId, Integer followId) throws Exception {
         Optional<User> optionalUser = userRepository.findById(userId);
