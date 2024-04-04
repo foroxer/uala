@@ -2,6 +2,7 @@ package com.juancastelli.uala.service;
 
 import com.juancastelli.uala.model.Tweet;
 import com.juancastelli.uala.model.User;
+import com.juancastelli.uala.repository.HomeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -12,13 +13,13 @@ import java.util.List;
 public class HomeService {
 
     @Autowired
-    private RedisTemplate<Integer, Tweet> homeRepository;
+    private HomeRepository homeRepository;
 
     public void updateUserHome(User user, Tweet tweet) {
-        homeRepository.opsForList().leftPush(user.getId(), tweet);
+        homeRepository.updateHome( user,  tweet);
     }
 
     public List<Tweet> getHome(Integer userId, Integer start, Integer offset) {
-        return homeRepository.opsForList().range(userId, start, start + offset);
+        return homeRepository.getHome( userId,  start,  offset);
     }
 }

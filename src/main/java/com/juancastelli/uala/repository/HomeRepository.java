@@ -1,28 +1,27 @@
 package com.juancastelli.uala.repository;
 
 import com.juancastelli.uala.model.Tweet;
-import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
+import com.juancastelli.uala.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.GenericToStringSerializer;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
 
-@Configuration
-@EnableConfigurationProperties(RedisProperties.class)
+@Repository
 public class HomeRepository {
+    @Autowired
+    RedisTemplate<Integer, Tweet> redisHomeImpl;
 
-    @Bean
-    public RedisTemplate<Integer, Tweet> redisConfig(RedisConnectionFactory connectionFactory) {
-        RedisTemplate<Integer, Tweet> redisTemplate = new RedisTemplate<>();
-        redisTemplate.setConnectionFactory(connectionFactory);
-        redisTemplate.setKeySerializer(new GenericToStringSerializer<>(Integer.TYPE));
-        redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());       // Add some specific configuration here. Key serializers, etc.
-        return redisTemplate;
+    public void updateHome(User user, Tweet tweet) {
+        redisHomeImpl.opsForList().leftPush(user.getId(), tweet);
     }
+
+    public List<Tweet> getHome(Integer userId, Integer start, Integer offset) {
+        return redisHomeImpl.opsForList().range(userId, start, start + offset);
+    }
+
+
 }
 
 
