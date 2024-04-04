@@ -13,11 +13,11 @@ public class HomeRepository {
     @Autowired
     RedisTemplate<Integer, Tweet> redisHomeImpl;
 
-    public void updateHome(User user, Tweet tweet) {
+    public void save(User user, Tweet tweet) {
         redisHomeImpl.opsForList().leftPush(user.getId(), tweet);
     }
 
-    public List<Tweet> getHome(Integer userId, Integer start, Integer offset) {
+    public List<Tweet> get(Integer userId, Integer start, Integer offset) {
         return redisHomeImpl.opsForList().range(userId, start, start + offset);
     }
 

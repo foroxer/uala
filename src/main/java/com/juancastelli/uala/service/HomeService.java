@@ -25,10 +25,10 @@ public class HomeService {
     }
 
     public void updateUserHome(User user, Tweet tweet) {
-        homeRepository.updateHome(user, tweet);
+        homeRepository.save(user, tweet);
     }
 
     public List<Tweet> getHome(Integer userId, Integer start, Integer offset) {
-        return homeRepository.getHome(userId, start, offset);
+        return homeRepository.get(userId, start, offset);
     }
 }

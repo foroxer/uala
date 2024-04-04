@@ -20,7 +20,7 @@ public class HomeController {
         this.homeService = homeService;
     }
 
-    @GetMapping("/home")
+    @GetMapping("/timeline")
     public List<Tweet> getHome(@RequestHeader Integer userID, @RequestParam(defaultValue = "0") Integer start, @RequestParam(defaultValue = "10") Integer offset) {
         return homeService.getHome(userID, start, offset);
     }
