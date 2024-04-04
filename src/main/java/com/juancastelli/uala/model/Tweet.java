@@ -17,8 +17,6 @@ public class Tweet {
     private Date date;
 
     @ManyToOne
-//    @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
-//    @JsonIdentityReference(alwaysAsId=true)
     @JsonIgnoreProperties({"tweets", "followers"})
     private User owner;
 
