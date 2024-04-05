@@ -1,0 +1,213 @@
+{
+  "collection": {
+    "info": {
+      "_postman_id": "4b2b418c-f2ca-4e6e-9967-5b53bb8120bf",
+      "name": "Uala",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+      "updatedAt": "2024-04-04T08:37:18.000Z",
+      "uid": "34025013-4b2b418c-f2ca-4e6e-9967-5b53bb8120bf",
+      "createdAt": null,
+      "lastUpdatedBy": null
+    },
+    "item": [
+      {
+        "name": "User",
+        "item": [
+          {
+            "name": "Follow",
+            "id": "b498a177-f71d-4a01-b96c-de1c0c2abed0",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "userID",
+                  "value": "1",
+                  "type": "text"
+                }
+              ],
+              "url": {
+                "raw": "localhost:8080/user/follow/2",
+                "host": [
+                  "localhost"
+                ],
+                "port": "8080",
+                "path": [
+                  "user",
+                  "follow",
+                  "2"
+                ]
+              }
+            },
+            "response": [],
+            "uid": "34025013-b498a177-f71d-4a01-b96c-de1c0c2abed0"
+          },
+          {
+            "name": "New user",
+            "id": "6ba773cc-a019-4017-8624-b884302ccc7b",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "userID",
+                  "value": "1",
+                  "type": "text"
+                }
+              ],
+              "url": {
+                "raw": "localhost:8080/user?name=test2",
+                "host": [
+                  "localhost"
+                ],
+                "port": "8080",
+                "path": [
+                  "user"
+                ],
+                "query": [
+                  {
+                    "key": "name",
+                    "value": "test2"
+                  }
+                ]
+              }
+            },
+            "response": [],
+            "uid": "34025013-6ba773cc-a019-4017-8624-b884302ccc7b"
+          }
+        ],
+        "id": "2c620218-3349-4461-afab-3737e2b59fa7",
+        "uid": "34025013-2c620218-3349-4461-afab-3737e2b59fa7"
+      },
+      {
+        "name": "Tweets",
+        "item": [
+          {
+            "name": "Tweet",
+            "id": "0e8b1157-8988-428d-a502-07b721fd84ea",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "userID",
+                  "value": "2",
+                  "type": "text"
+                }
+              ],
+              "url": {
+                "raw": "localhost:8080/tweet?message={{$timestamp}} este es mi tweet como user 2",
+                "host": [
+                  "localhost"
+                ],
+                "port": "8080",
+                "path": [
+                  "tweet"
+                ],
+                "query": [
+                  {
+                    "key": "message",
+                    "value": "{{$timestamp}} este es mi tweet como user 2"
+                  }
+                ]
+              }
+            },
+            "response": [],
+            "uid": "34025013-0e8b1157-8988-428d-a502-07b721fd84ea"
+          },
+          {
+            "name": "tweet",
+            "id": "b41743c2-64e0-4c31-967f-b648ed825780",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "localhost:8080/tweet/1",
+                "host": [
+                  "localhost"
+                ],
+                "port": "8080",
+                "path": [
+                  "tweet",
+                  "1"
+                ]
+              }
+            },
+            "response": [],
+            "uid": "34025013-b41743c2-64e0-4c31-967f-b648ed825780"
+          }
+        ],
+        "id": "7816500a-ebc7-4b69-9b63-c0294ef7f6d8",
+        "uid": "34025013-7816500a-ebc7-4b69-9b63-c0294ef7f6d8"
+      },
+      {
+        "name": "Home",
+        "item": [
+          {
+            "name": "home",
+            "id": "5db064e4-4799-48c9-99af-359b86f8d0cc",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "userID",
+                  "value": "1",
+                  "type": "text"
+                }
+              ],
+              "url": {
+                "raw": "localhost:8080/timeline",
+                "host": [
+                  "localhost"
+                ],
+                "port": "8080",
+                "path": [
+                  "timeline"
+                ]
+              }
+            },
+            "response": [],
+            "uid": "34025013-5db064e4-4799-48c9-99af-359b86f8d0cc"
+          }
+        ],
+        "id": "8a2e6e4c-2a40-49b1-beff-d14df6c6ae84",
+        "uid": "34025013-8a2e6e4c-2a40-49b1-beff-d14df6c6ae84"
+      },
+      {
+        "name": "ping",
+        "id": "b4261fc6-2067-402a-b38e-dd87a1eb0120",
+        "protocolProfileBehavior": {
+          "disableBodyPruning": true
+        },
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "localhost:8080/ping",
+            "host": [
+              "localhost"
+            ],
+            "port": "8080",
+            "path": [
+              "ping"
+            ]
+          }
+        },
+        "response": [],
+        "uid": "34025013-b4261fc6-2067-402a-b38e-dd87a1eb0120"
+      }
+    ]
+  }
+}

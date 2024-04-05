@@ -6,10 +6,8 @@
 
 ### Dependencias:
 
-```
-* Docker
-* Docker Compose
-```
+* [Docker](https://www.docker.com/)
+* [Docker Compose](https://docs.docker.com/compose/)
 
 ### Para startear el proyecto :
 
@@ -29,10 +27,6 @@ $ docker-compose up
 
 ![Infrastructura](images/infrastructura.png "Infrastructura")
 
-# Postman Lib
-
-[link](https://api.postman.com/collections/34025013-4b2b418c-f2ca-4e6e-9967-5b53bb8120bf?access_key=PMAT-01HTNNE6DC4ZEH33FS02S3RV2W)
-
 ### Consideraciones
 
 ```
@@ -41,6 +35,8 @@ este se enviara por request header userID
 
 ```
 
-## Assumptions
+## [Assumptions](business.txt)
 
-[Assumptions](business.txt)
+## [Postman Lib](postmanLib.json)
+
+## [Swagger](http://localhost:8080/swagger-ui/index.html)
